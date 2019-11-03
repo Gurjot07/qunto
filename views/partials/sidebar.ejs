@@ -1,0 +1,14 @@
+<% if(typeof(recent)!='undefined' && recent.length>0){  %>
+<div class="h4 text-muted ">Recent Questions</div>
+<ul class="list-unstyled ml-2">
+<div>
+
+<% recent.forEach((q)=>{ %>
+
+<li ><span class="badge badge-success" title="Upvotes - Downvotes" style="width: 30px"><%= q.views %></span> <a href="/question/<%= q._id%>" class="ml-2"><%= q.title %></a></li>
+<%})%>
+</div>
+
+</ul>
+
+<%}%>

@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<% if ( typeof(message)!='undefined'){%>
+    <h3 class="bg-primary text-center text-white"> <%= message %> </h3>
+    <%}%>
+<div class="row mt-5">
+    
+
+    <div class="col-md-9">
+        <% if(questions.length>0) { questions.forEach(function (question) {
+
+        %>
+
+        <div class="card">
+            <a href="/question/<%= question._id %>">     <div class="card-body">
+                <div class="ans-box float-right  text-center h6 text-muted"><strong><%= question.views %></strong> <p class="pt-1"> Views </p></div>
+                <div class="ans-box float-right  text-center h6 text-muted"><strong><%= question.ans %></strong> <p class="pt-1"> Answers </p></div>
+                <h5 class="card-title"> <%= question.title %> </h5>
+            </a>
+                <div class="card-text">
+                 
+                        <% question.tags.forEach((tag)=>{  %>
+
+                        <a href="#" class="badge badge-primary"><%= tag %> </a>
+                    <% }) %>
+
+                </div>
+                   
+                <p class="small mt-2">Asked by <a href="/user/<%= question.askedby %>"><%= question.askedby %></a> in <%= question.category %> </p>
+           
+        </div> 
+            
+        </div>
+
+        <% }) } else{%>
+            <h3>No questions yet 😊</h3>
+            <%}%>
+        
+
+    </div>
+
+
+    <div class="col-md-3">
+    </div>
+
+</div>
+
+
+<%- include('partials/footer') %>
+

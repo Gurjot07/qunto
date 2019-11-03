@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+
+<div class=" mt-5">
+
+
+        <div class="row ">
+
+            <div class="col-sm-8 mx-sm-auto" >
+                <% questions.forEach(function (question) {
+
+                %>
+
+
+                     <% for(let i=0;i<question.tags.length;i++){%>
+
+                    <a href="" class="">
+                        <p class="badge badge-primary text-white"><%= question.tags[i] %></p>
+                    </a>
+                    <%}%>
+
+
+             <% })%>
+            </div>
+
+        </div>
+
+
+
+</div>
+
+<%- include('partials/footer') %>

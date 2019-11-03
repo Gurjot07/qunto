@@ -1,0 +1,70 @@
+
+<%- include('partials/header') %>
+
+
+<div class="row mt-5 ">
+
+      <% users.forEach(function (user) { %>
+    <div class="col-md-6 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="media align-items-center"><span style="background-image: url(<%= user.imageurl %>)" class="avatar avatar-xl mr-3"></span>
+                    <div class="media-body overflow-hidden">
+                        <h5 class="card-text mb-0"><%= user.username %></h5>
+                        <% let country %>
+                        <% if(user.country.length >13){
+                            country = user.country.slice(0,15) +" ...";
+                        }
+                        else {
+                            country = user.country;
+                        }
+                        %>
+                        <p class="card-text text-uppercase text-muted mt-2"><span class="fa fa-long-arrow-down"></span><%= country %></p>
+
+                    </div>
+                </div><a href="/user/<%= user.username %>" class="tile-link"></a>
+            </div>
+        </div>
+    </div>
+
+    <% })%>
+
+
+
+</div>
+<div class="row mt-5">
+    <% if (pages > 0) { %>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination text-center">
+            <% if (current == 1) { %>
+            <li class="page-item page-link disabled"><a>First</a></li>
+            <% } else { %>
+            <li class="page-item"><a href="/users/1" class="page-link">First</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+            <li class="page-item disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+            <% if (i == current) { %>
+            <li class="page-item active"><a class="page-link"><%= i %></a></li>
+            <% } else { %>
+            <li class="page-link"><a href="/users/<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(current) + 4 && i < pages) { %>
+            <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+            <li class="page-link disabled"><a>Last</a></li>
+            <% } else { %>
+            <li class="page-item"><a href="/users/<%= pages %>" class="page-link">Last</a></li>
+            <% } %>
+        </ul>
+    </nav>
+    <% } %>
+
+
+</div>
+<%- include('partials/footer') %>
+

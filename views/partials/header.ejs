@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tags-input-beautifier.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link rel="stylesheet" href="/css/fontawesom/css/all.css">
+    <link rel="stylesheet" href="/dist/ui/trumbowyg.min.css">
+
+    </script>
+    <title><%= title %></title>
+    <style>
+        .searchbox {
+    margin-top: 10px;
+}
+/* nav.navbar.navbar-light.navbar-expand-lg.fixed-top {
+    padding: 0px 0px 0px 10px;
+} */
+/* nav.navbar.navbar-light.navbar-expand-lg.fixed-top {
+    padding: 0px 0px 10px 15px;
+} */
+.col-sm-8.answers {
+    margin-top: -100px;
+}
+        /* @-webkit-keyframes blinker {
+  from {color: white;}
+  to {opacity: black;}
+}
+.blink{
+  background-color:red;
+	text-decoration: blink;
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 0.6s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-direction: alternate;
+} */
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light  navbar-expand-lg  fixed-top  navj"
+        style="background-color: #ffffff;
+">
+        <a class="navbar-brand" href="/">Qunto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form method="POST" action="/search" novalidate="novalidate" autocomplete="off"
+                class="searchbox sbx-custom " id="search-input ">
+                <div role="search" class="sbx-custom__wrapper">
+                    <input type="search" name="search" placeholder="Search your website" autocomplete="off"
+                        required="required" id="search" class="sbx-custom__input">
+                    <button type="submit" title="Submit your search query." class="sbx-custom__submit">
+                        <span aria-label="Search">
+                            <span style="font-size:1.2rem;">
+                                <i class="fas fa-search  text-white" style="margin-top: 10px"></i>
+                            </span>
+                        </span>
+                    </button>
+                    <button type="reset" title="Clear the search query." class="sbx-custom__reset">
+                        <span style="color: #687e82">
+                            <i class="fas fa-times  "></i>
+                        </span>
+                    </button>
+                    <div class="search-results" id="results">
+
+                        <ul class="list-unstyled" id="result-list">
+
+                            <li> <span class="fas fa-history"></span><a href="">Here will we history from local
+                                    storage</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+            <script type="text/javascript">
+                document.querySelector('.searchbox [type="reset"]').addEventListener('click', function () { this.parentNode.querySelector('input').focus(); });
+            </script>
+
+            <ul class="navbar-nav  mr-1">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/1">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/questions/hot"> <span style="color: crimson"> Hot <i
+                                class="fab fa-hotjar"></i> Questions </span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/questions" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Questions
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/questions/1">All Questions</a>
+                        <a class="dropdown-item" href="/ask">Ask Question</a>
+                        <a class="dropdown-item" href="/questions/unanswered/1">Unanswered Questions</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/tags"><span class="badge badge-success"> All Tags </span></a>
+                    </div>
+                </li>
+            </ul>
+            <div class=" ml-auto mr-5">
+
+                <% if(locals.userji){%>
+                <ul class="navbar-nav">
+                    <a href="/dashboard"><img src="/images/default.png" class="img-circle img-circle-nav" alt=""></a>
+                    <li class="nav-item dropdown mr-3">
+                        <a class="nav-link dropdown-toggle" href="/questions" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+
+                <%}else {%>
+                <a href="/login" class="nav-link loginbutton"><span class="text-white">Login</span></a>
+                <%}%>
+    </div>
+    </div>
+</nav>
+
+
+
+<div class="container mt-5" style="overflow: auto">

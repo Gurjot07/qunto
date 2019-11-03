@@ -1,0 +1,61 @@
+<style>
+
+.login-show.alert.alert-primary.text-center {
+    margin: -51px 0px 0rem 0rem;
+    padding-right: 19rem;
+    padding-left: 20rem;
+}
+</style> <%- include('partials/header') %>
+
+<div class="row mt-5">
+
+    <div class="col-md-9">
+    <div class="question_view">
+        <h2><%= question.title %></h2>
+<%- question.description %>
+        </p>
+        <hr align="left" width="90%">
+        <h3 class="">  Answers </h3>
+        
+       <p id="contents">
+          <% question.answers.forEach((ans)=>{ %>
+            <%- ans.text %>
+            <hr align="left" width="90%">
+            <%})%>
+       </p>
+    </div>
+
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <%- include('partials/sidebar')%>
+    </div>
+    <% if(!locals.userji){%>
+        <div  class="login-show alert alert-primary text-center" role="alert">
+            Pls <strong> <a href="/login">login </a> </strong> to answer
+          </div>
+        <%} else {%>
+    <div class="col-sm-8 answers">
+        <h6>Add Your Answer</h6>
+ <form action="/questions/ans" method="POST">
+
+        <div class="form-group">
+            <textarea id="trumbowyg" name="text"></textarea>
+            <input type="text" name="question_id" value="<%= question._id %>" hidden>
+            <input type="submit" class="btn btn-primary" value="Sumit Answer">
+        </div>
+    </form>
+    </div>
+    <%}%>
+    </div>
+
+
+<%- include('partials/footer') %>
+
+<script>
+        $('#trumbowyg').trumbowyg();
+        
+        </script>

@@ -1,0 +1,104 @@
+<style>
+    span.timeago {
+        margin-right: -79px;
+        float: right;
+        font-size: 17px;
+    }
+</style>
+<%- include('partials/header') %>
+
+<div class="row mt-5 ">
+    <div class="col-md-9">
+        <% if ( typeof(message)!='undefined'){%>
+        <h3 class=""> <%= message %> </h3>
+        <%}%>
+        <% if(questions.length>0) { questions.forEach(function (question) {
+
+        %>
+        <div class="card">
+            <a href="/question/<%= question._id %>">
+                <div class="card-body">
+                    <div class="ans-box float-right  text-center h6 text-muted"><strong><%= question.views %></strong>
+                        <p class="pt-1"> Views </p>
+                    </div>
+                    <div class="ans-box float-right  text-center h6 text-muted">
+                        <strong><%= question.totalanswers %></strong>
+                        <p class="pt-1"> Answers </p>
+                    </div>
+                    <h5 class="card-title"> <%= question.title.length>70?question.title.slice(0,70)+"..":question.title %> </h5>
+            </a>
+            <div class="card-text">
+
+                <% question.tags.forEach((tag)=>{  %>
+
+                <a href="#" class="badge badge-primary"><%= tag %> </a>
+                <% }) %>
+
+            </div>
+
+            <p class="small mt-2">Asked by <a href="/user/<%= question.askedby %>"> <%= question.askedby  %></a> in
+                <%= question.category %> <span class="timeago"><%=  fromNow(question.date) %> </span> </p>
+
+        </div>
+
+    </div>
+
+    <% }) } else{%>
+    <h3 class="text-center">No questions yet 😊</h3>
+    <%}%>
+        <% if ( typeof(pages)!='undefined' && pages > 0) { %>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination text-center">
+            <% let link %>
+            <% if(unanswered){
+                    link="/questions/unanswered"
+                } else{
+                    link="/questions"
+                }%>
+
+            <% if (current == 1) { %>
+            <li class="page-item page-link disabled"><a>First</a></li>
+            <% } else { %>
+            <li class="page-item"><a href="<%= link %>/1" class="page-link">First</a></li>
+            <% } %>
+
+
+            <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+            <li class="page-item disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4)  && i <= pages; i++) { %>
+            <% if (i == current) { %>
+            <li class="page-item active"><a class="page-link"><%= i %></a></li>
+            <% } else { %>
+
+            <li class="page-link"><a href="<%= link %>/<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(current) + 4 && i < pages) { %>
+            <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% } %>
+
+
+            <% if (current == pages) { %>
+            <li class="page-link disabled"><a>Last</a></li>
+            <% } else { %>
+            <li class="page-item"><a href="<%= link %>/<%= pages %>" class="page-link">Last</a></li>
+            <% } %>
+        </ul>
+    </nav>
+    <% } %>
+
+
+
+</div>
+
+
+<div class="col-md-3">
+    <%- include('partials/sidebar')%>
+</div>
+
+</div>
+
+
+<%- include('partials/footer') %>

@@ -1,0 +1,244 @@
+<%- include('partials/header') %>
+
+<div class="row mt-5">
+
+    <div class="col-sm-3 "><img src="<%= user.imageurl %>" class="m-x-auto img-fluid img-circle" alt="avatar">
+        <h6 class="mt-4 ">Website</h6>
+        <p>
+            <a href="<%= user.website %>">
+                <% let website %>
+                <% if(user.website.length >26){
+                    website = user.website.slice(0,26) +" ...";
+                }
+                else {
+                    website = user.website;
+                }
+                %>
+                <%= website %>
+            </a>
+        </p>
+        <h6 class="mt-4">Skills</h6>
+
+        <% if(user.skills.length>0){ %>
+        <p >
+            <% user.skills.forEach(function (skill) {%>
+            <span class=" badge badge-success "><%= skill%></span>
+            <%})%>
+
+        </p>
+        <% } else{ %>
+        <p><a href="" data-target="#edit" data-toggle="tab" >Add Your Skills</a></p>
+        <% } %>
+        <h6 class="mt-4">Account And Privacy</h6>
+        <script>
+            function deleteUser() {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will lost your data !",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Your account deleted successfully", {
+                                icon: "success",
+                            });
+                            setTimeout(function () {
+                                window.location.href = '/delete/<%= user.username%>';
+                            },1000)
+                        } else {
+                            swal("Well come back !");
+                        }
+                    });
+
+            }
+                    </script>
+        <p><button  style="background: transparent;border: none;color: blue" onclick="deleteUser()"  >Delete Account</button></p>
+    </div>
+
+    <div class=" col-sm-9"> <h3><%= user.firstname %> <%= user.lastname %></h3>
+    <p class="text-muted">
+        <% if(user.bio.length>0){ %>
+        <p><%= user.bio %></p>
+        <% } else{ %>
+        <p><a href="" data-target="#edit" data-toggle="tab" >Add Your Bio</a></p>
+        <% } %>
+    </p>
+        <ul class="nav nav-tabs in">
+            <li class="nav-item">
+                <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+            </li>
+        </ul>
+        <div class="tab-content p-b-3">
+            <div class="tab-pane active mt-4" id="profile">
+
+                <div class="row">
+                    <div class="col-xl-6 mt-4">
+                        <span class="btn btn-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                        <span class="btn btn-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                        <span class="btn btn-danger"><i class="fa fa-eye"></i> 245 Views</span>
+
+                    </div>
+                    <div class="col-xl-6 mt-2">
+                        <h6>Recent Tags</h6>
+                        <a href="" class="tag tag-default tag-pill">html5</a>
+                        <a href="" class="tag tag-default tag-pill">react</a>
+                        <a href="" class="tag tag-default tag-pill">codeply</a>
+                        <a href="" class="tag tag-default tag-pill">angularjs</a>
+                        <a href="" class="tag tag-default tag-pill">css3</a>
+                        <a href="" class="tag tag-default tag-pill">jquery</a>
+                        <a href="" class="tag tag-default tag-pill">bootstrap</a>
+                        <a href="" class="tag tag-default tag-pill">responsive-design</a>
+                        <hr>
+
+                    </div>
+                    <div class="col-md-12">
+                        <h4 class="mt-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Activity</h4>
+                        <table class="table table-hover table-striped">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong><%= user.firstname %></strong> write an post <strong>which one to choose React js vs Angular js vs Vue js </strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><%= user.firstname %></strong> comment on  <strong>what is tenser flow js</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><%= user.firstname %></strong> up votes on <strong>what is the importence of git for developers</strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><%= user.firstname %></strong> down vote on <strong>can we use react on server side</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong><%= user.firstname %></strong> got  <strong> Golden bedge</strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--/row-->
+            </div>
+            <div class="tab-pane" id="messages">
+
+                <div class="mt-4">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div>
+
+
+                </div>
+                <!--<table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                    <td>
+                        <span class="pull-xs-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pull-xs-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pull-xs-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pull-xs-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
+                    </td>
+                </tr>
+                </tbody>
+            </table>-->
+            </div>
+            <div class="tab-pane" id="edit">
+
+                <form action="/user/update" method="post" role="form" class="mt-4">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="<%= user.firstname %>" name="fname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="<%= user.lastname %>" name="lname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="email" value="<%= user.email %>" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="<%= user.skills %>" name="skills">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Bio</label>
+                        <div class="col-lg-9">
+                            <textarea class="form-control" type="text" rows="5" name="bio"><%= user.bio %></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="url" value="<%= user.website %>" name="website" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Country</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="<%= user.country %>" placeholder="" name="country">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" value="<%= user.username %>" name="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<%- include('partials/footer') %>

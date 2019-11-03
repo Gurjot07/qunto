@@ -1,0 +1,73 @@
+<%- include('partials/header') %>
+
+<div class="row mt-5">
+    <div class="col-md-8">
+
+        <form action="/questions/ask" method="post" id ="tags-beauty">
+            <div class="form-group">
+                <label for="title">Question Tittle</label>
+                <input type="text" class="form-control" id="tittle" name="title" required >
+            </div>
+
+            <div class="form-group">
+                    <label for="tags">Question Category</label>
+                <select name="category" class="form-control" required>
+                    <option value="HTML">HTML</option>
+                    <option value="Javascript">Javascript</option>
+                    <option value="Node Js">Node Js</option>
+                    <option value="Express">Express Js</option>
+                    <option value="React Js">React Js</option>
+                    <option value="REST APIS">REST APIS</option>
+                    <option value="Other">Others</option>
+                </select>
+            </div>
+            <div class="form-group">
+                    <label for="tags">Question Description</label>
+                <textarea id="trumbowyg" name="description" placeholder="You can paste here html also i am ready to catch 😊"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tags">Question Tags</label>
+
+                <p><input name="q_tags" type="text"  id="tags" placeholder="user  , (comma) for creating more tags" required></p>
+                <script src="/js/tags-input-beautifier.min.js"></script>
+        <script>
+            var form = document.getElementById('tags-beauty');
+            var tags = new TIB(form.tags, {
+                join: ', ',
+                update: function(tags) {
+                    console.log([this, tags]); // check the added tags on every update event
+                }
+            });</script>
+
+            </div>
+            <!-- <% let askedBy %>
+            <% if(user){%>
+             <% askedBy = user %>
+            <%} else {%>
+            <% askedBy = "Anonymous"%>
+            <% }%> -->
+
+            <select name="askedby" id="askedby" class="form-control" hidden>
+                <option value="<%= user %>"><%= user %></option>
+
+            </select><br> 
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+    <div class="col-md-1">
+
+    </div>
+<div class="col-md-3">
+    <%- include('partials/sidebar') %>
+
+    </div>
+
+</div>
+
+<%- include('partials/footer') %>
+<script>
+$('#trumbowyg').trumbowyg();
+
+</script>
